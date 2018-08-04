@@ -1,0 +1,10 @@
+server:
+  port: 2011
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/graduation?characterEncoding=UTf-8&amp;useSSL=false
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: mysql
+    password: mysql
+  

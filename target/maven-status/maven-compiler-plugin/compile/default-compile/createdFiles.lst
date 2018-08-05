@@ -1,0 +1,10 @@
+cn\xiaozi5\graduation\pojo\User.class
+cn\xiaozi5\graduation\pojo\UserInfo.class
+cn\xiaozi5\graduation\user\service\impl\UserServiceImpl.class
+cn\xiaozi5\graduation\GraduationApplication.class
+cn\xiaozi5\graduation\conf\MVCConf.class
+cn\xiaozi5\graduation\user\controller\UserCtl.class
+cn\xiaozi5\graduation\inter\UseTimeInter.class
+cn\xiaozi5\graduation\user\mapper\UserMapper.class
+cn\xiaozi5\graduation\user\mapper\UserInfoMapper.class
+cn\xiaozi5\graduation\user\service\UserService.class

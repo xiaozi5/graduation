@@ -1,5 +1,6 @@
-var common={
-    getPath:function(){
-       return  window.location.host;
+var common = {
+    getPath: function() {
+        var str = window.location.protocol + window.location.host;
+        return "";
     }
 }

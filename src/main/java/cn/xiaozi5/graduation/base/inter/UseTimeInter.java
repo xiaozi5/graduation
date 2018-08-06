@@ -1,8 +1,9 @@
-package cn.xiaozi5.graduation.inter;
+package cn.xiaozi5.graduation.base.inter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.aspectj.weaver.ast.And;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -19,14 +20,13 @@ public class UseTimeInter implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		if (handler instanceof HandlerMethod) {
+		if (handler instanceof HandlerMethod && !request.getRequestURL().toString().endsWith("error")) {
 			long startTime = System.currentTimeMillis();
 			tlocal.set(startTime);
 		}
-
 		return true;
 	}
-	
+
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {

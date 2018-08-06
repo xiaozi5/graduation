@@ -1,4 +1,4 @@
-package cn.xiaozi5.graduation.conf;
+package cn.xiaozi5.graduation.base.conf;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -6,13 +6,12 @@ import java.util.List;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
-import cn.xiaozi5.graduation.inter.UseTimeInter;
+import cn.xiaozi5.graduation.base.inter.UseTimeInter;
 
 @Configuration
 public class MVCConf implements WebMvcConfigurer {

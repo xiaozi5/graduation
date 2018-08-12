@@ -10,7 +10,9 @@ import cn.xiaozi5.graduation.pojo.User;
 
 /**
  * @author xiaozi5
+
  *	权限管理
+
  */
 @RestController
 @RequestMapping("/authority")
@@ -19,11 +21,15 @@ public class AuthorityCtl {
 	private AuthorityService authorityService;
 
 	
+	/**
+	 * @param user
+	 * @return
+	 * 获取左边菜单栏信息
+	 */
 	@RequestMapping(value = "/getLeftNav", method = RequestMethod.POST)
 	public Object getLeftNav(@RequestBody User user) {
 		authorityService.getLeftNav(user);
 		return null;
 	}
-
 	
 }

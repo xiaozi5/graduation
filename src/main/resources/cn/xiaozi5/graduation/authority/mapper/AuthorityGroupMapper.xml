@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xiaozi5.graduation.authority.mapper.AuthorityGroupMapper" >
+  <resultMap id="BaseResultMap" type="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+    <id column="authority_group_id" property="authorityGroupId" jdbcType="INTEGER" />
+    <result column="authority_group_name" property="authorityGroupName" jdbcType="VARCHAR" />
+    <collection property="authorityList">
+	 	<id column="authority_id" property="authorityId" jdbcType="INTEGER" />
+	    <result column="authority_name" property="authorityName" jdbcType="VARCHAR" />
+	    <result column="authority_url" property="authorityUrl" jdbcType="VARCHAR" />
+	    <result column="authority_group_id" property="authorityGroupId" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    authority_group_id, authority_group_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gd_authority_group
+    where authority_group_id = #{authorityGroupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gd_authority_group
+    where authority_group_id = #{authorityGroupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+    insert into gd_authority_group (authority_group_id, authority_group_name
+      )
+    values (#{authorityGroupId,jdbcType=INTEGER}, #{authorityGroupName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+    insert into gd_authority_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authorityGroupId != null" >
+        authority_group_id,
+      </if>
+      <if test="authorityGroupName != null" >
+        authority_group_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authorityGroupId != null" >
+        #{authorityGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="authorityGroupName != null" >
+        #{authorityGroupName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+    update gd_authority_group
+    <set >
+      <if test="authorityGroupName != null" >
+        authority_group_name = #{authorityGroupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where authority_group_id = #{authorityGroupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+    update gd_authority_group
+    set authority_group_name = #{authorityGroupName,jdbcType=VARCHAR}
+    where authority_group_id = #{authorityGroupId,jdbcType=INTEGER}
+  </update>
+</mapper>

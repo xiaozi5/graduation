@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.xiaozi5.graduation.authority.mapper.AuthorityMapper" >
-  <resultMap id="BaseResultMap" type="cn.xiaozi5.graduation.user.pojo.Authority" >
+  <resultMap id="BaseResultMap" type="cn.xiaozi5.graduation.pojo.Authority" >
     <id column="authority_id" property="authorityId" jdbcType="INTEGER" />
     <result column="authority_name" property="authorityName" jdbcType="VARCHAR" />
     <result column="authority_url" property="authorityUrl" jdbcType="VARCHAR" />
@@ -20,13 +20,13 @@
     delete from gd_authority
     where authority_id = #{authorityId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.xiaozi5.graduation.user.pojo.Authority" >
+  <insert id="insert" parameterType="cn.xiaozi5.graduation.pojo.Authority" >
     insert into gd_authority (authority_id, authority_name, authority_url, 
       authority_group_id)
     values (#{authorityId,jdbcType=INTEGER}, #{authorityName,jdbcType=VARCHAR}, #{authorityUrl,jdbcType=VARCHAR}, 
       #{authorityGroupId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="cn.xiaozi5.graduation.user.pojo.Authority" >
+  <insert id="insertSelective" parameterType="cn.xiaozi5.graduation.pojo.Authority" >
     insert into gd_authority
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="authorityId != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.xiaozi5.graduation.user.pojo.Authority" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xiaozi5.graduation.pojo.Authority" >
     update gd_authority
     <set >
       <if test="authorityName != null" >
@@ -72,7 +72,7 @@
     </set>
     where authority_id = #{authorityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.xiaozi5.graduation.user.pojo.Authority" >
+  <update id="updateByPrimaryKey" parameterType="cn.xiaozi5.graduation.pojo.Authority" >
     update gd_authority
     set authority_name = #{authorityName,jdbcType=VARCHAR},
       authority_url = #{authorityUrl,jdbcType=VARCHAR},

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.xiaozi5.graduation.authority.mapper.AuthorityGroupMapper" >
-  <resultMap id="BaseResultMap" type="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+  <resultMap id="BaseResultMap" type="cn.xiaozi5.graduation.pojo.AuthorityGroup" >
     <id column="authority_group_id" property="authorityGroupId" jdbcType="INTEGER" />
     <result column="authority_group_name" property="authorityGroupName" jdbcType="VARCHAR" />
-    <collection property="authorityList">
-	 	<id column="authority_id" property="authorityId" jdbcType="INTEGER" />
+    <collection property="authorityList" javaType="Authority" >
+	 	<id column="authority_id" property="authorityId" jdbcType="INTEGER"  />
 	    <result column="authority_name" property="authorityName" jdbcType="VARCHAR" />
 	    <result column="authority_url" property="authorityUrl" jdbcType="VARCHAR" />
-	    <result column="authority_group_id" property="authorityGroupId" jdbcType="INTEGER" />
+	    <result  column="authority_group_id" property="authorityGroupId" jdbcType="INTEGER"  />
     </collection>
   </resultMap>
   
@@ -25,13 +25,13 @@
     delete from gd_authority_group
     where authority_group_id = #{authorityGroupId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+  <insert id="insert" parameterType="cn.xiaozi5.graduation.pojo.AuthorityGroup" >
     insert into gd_authority_group (authority_group_id, authority_group_name
       )
     values (#{authorityGroupId,jdbcType=INTEGER}, #{authorityGroupName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+  <insert id="insertSelective" parameterType="cn.xiaozi5.graduation.pojo.AuthorityGroup" >
     insert into gd_authority_group
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="authorityGroupId != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+  <update  id="updateByPrimaryKeySelective" parameterType="cn.xiaozi5.graduation.pojo.AuthorityGroup" >
     update gd_authority_group
     <set >
       <if test="authorityGroupName != null" >
@@ -59,9 +59,16 @@
     </set>
     where authority_group_id = #{authorityGroupId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.xiaozi5.graduation.user.pojo.AuthorityGroup" >
+  <update id="updateByPrimaryKey" parameterType="cn.xiaozi5.graduation.pojo.AuthorityGroup" >
     update gd_authority_group
     set authority_group_name = #{authorityGroupName,jdbcType=VARCHAR}
     where authority_group_id = #{authorityGroupId,jdbcType=INTEGER}
   </update>
+  <select id="queryUserAuthorityGroups" parameterType="User" resultMap="BaseResultMap">
+		  	select ag.authority_group_id , ag.authority_group_name , a.authority_id , a.authority_name , a.authority_url
+		  	from gd_authority_group ag , lk_user_group_authority_group lugag , gd_user_group ug , gd_user u ,gd_authority a
+		  	where   a.authority_group_id = ag.authority_group_id and ag.authority_group_id = lugag.authority_group_id 
+		  			and ug.group_id = lugag.group_id and u.group_id = ug.group_id and u.id = #{id , jdbcType=INTEGER}
+  </select>
+  
 </mapper>

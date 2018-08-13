@@ -1,11 +1,16 @@
 package cn.xiaozi5.graduation.authority.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.xiaozi5.graduation.authority.service.AuthorityService;
+import cn.xiaozi5.graduation.pojo.AuthorityGroup;
 import cn.xiaozi5.graduation.pojo.User;
 
 /**
@@ -18,6 +23,7 @@ import cn.xiaozi5.graduation.pojo.User;
 @RequestMapping("/authority")
 public class AuthorityCtl {
 	
+	@Autowired
 	private AuthorityService authorityService;
 
 	
@@ -26,10 +32,10 @@ public class AuthorityCtl {
 	 * @return
 	 * 获取左边菜单栏信息
 	 */
-	@RequestMapping(value = "/getLeftNav", method = RequestMethod.POST)
-	public Object getLeftNav(@RequestBody User user) {
-		authorityService.getLeftNav(user);
-		return null;
+	@RequestMapping(value = "/getLeftNav", method = {RequestMethod.POST,RequestMethod.GET})
+	public Object getLeftNav( User user) {
+		List<AuthorityGroup> list=authorityService.getLeftNav(user);
+		return list;
 	}
 	
 }

@@ -1,6 +1,6 @@
-
-$(function(){
+$(function() {
     $("#firstPage").panel('open');
+    inituser();
 })
 
 function inituser() {

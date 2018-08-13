@@ -1,4 +1,4 @@
-package cn.xiaozi5.graduation.user.pojo;
+package cn.xiaozi5.graduation.pojo;
 
 public class Authority {
     private Integer authorityId;

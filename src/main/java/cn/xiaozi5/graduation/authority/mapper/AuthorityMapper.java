@@ -3,8 +3,8 @@ package cn.xiaozi5.graduation.authority.mapper;
 
 import java.util.List;
 
+import cn.xiaozi5.graduation.pojo.Authority;
 import cn.xiaozi5.graduation.pojo.User;
-import cn.xiaozi5.graduation.user.pojo.Authority;
 
 public interface AuthorityMapper {
     int deleteByPrimaryKey(Integer authorityId);

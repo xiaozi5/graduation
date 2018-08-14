@@ -19,9 +19,10 @@ spring:
 mybatis:
   typeAliasesPackage: cn.xiaozi5.graduation.pojo
   
+  
 logging:
   level:
-    org.apache.ibatis: debug
+    cn.xiaozi5: DEBUG
 #logging:
 #  config: classpath:cn/xiaozi5/graduation/conf/logconf.xml
 #log:

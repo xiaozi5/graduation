@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xiaozi5.graduation.user.mapper.UserGroupMapper">
+	<resultMap id="BaseResultMap" type="cn.xiaozi5.graduation.pojo.UserGroup">
+		<id column="group_id" jdbcType="INTEGER" property="groupId" />
+		<result column="group_name" jdbcType="VARCHAR"	property="groupName" />
+		<result column="group_state" jdbcType="INTEGER"	property="groupState" />
+		<collection property="authorityGroups" javaType="List" ofType="AuthorityGroup">
+			<id column="authority_group_id" property="authorityGroupId"	jdbcType="INTEGER" />
+			<result column="authority_group_name" property="authorityGroupName" jdbcType="VARCHAR" />
+			<collection property="authorityList" javaType="Authority">
+				<id column="authority_id" property="authorityId" jdbcType="INTEGER" />
+				<result column="authority_name" property="authorityName" jdbcType="VARCHAR" />
+				<result column="authority_url" property="authorityUrl" jdbcType="VARCHAR" />
+				<result column="authority_group_id"	property="authorityGroupId" jdbcType="INTEGER" />
+			</collection>
+		</collection>
+	</resultMap>
+
+  <sql id="Base_Column_List">
+    group_id, group_name, group_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gd_user_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gd_user_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.xiaozi5.graduation.pojo.UserGroup">
+    insert into gd_user_group (group_id, group_name, group_state
+      )
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{groupState,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xiaozi5.graduation.pojo.UserGroup">
+    insert into gd_user_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="groupState != null">
+        group_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupState != null">
+        #{groupState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xiaozi5.graduation.pojo.UserGroup">
+    update gd_user_group
+    <set>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupState != null">
+        group_state = #{groupState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xiaozi5.graduation.pojo.UserGroup">
+    update gd_user_group
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      group_state = #{groupState,jdbcType=INTEGER}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  
+    <select id="queryAllUserGroup"  resultMap="BaseResultMap">
+		  	select ug.group_id , ug.group_name , ag.authority_group_id , ag.authority_group_name , a.authority_id , a.authority_name , a.authority_url
+		  	from gd_authority_group ag , lk_user_group_authority_group lugag , gd_user_group ug  ,gd_authority a
+		  	where   a.authority_group_id = ag.authority_group_id and ag.authority_group_id = lugag.authority_group_id 
+		  			and ug.group_id = lugag.group_id and group_state=1
+  </select>
+  
+  
+</mapper>

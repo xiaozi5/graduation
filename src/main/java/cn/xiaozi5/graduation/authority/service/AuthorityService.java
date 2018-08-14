@@ -1,8 +1,5 @@
 package cn.xiaozi5.graduation.authority.service;
 
-import java.util.List;
-
-import cn.xiaozi5.graduation.pojo.AuthorityGroup;
 import cn.xiaozi5.graduation.pojo.User;
 
 /**
@@ -17,6 +14,8 @@ public interface AuthorityService {
 	 * @return
 	 * 获取左边任务栏的信息
 	 */
-	List<AuthorityGroup> getLeftNav(User user);
+	Object getLeftNav(User user);
+	
+	Object getLeftNavByCache(User user);
 
 }

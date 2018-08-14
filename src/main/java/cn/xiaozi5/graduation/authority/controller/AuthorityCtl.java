@@ -1,14 +1,11 @@
 package cn.xiaozi5.graduation.authority.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.xiaozi5.graduation.authority.service.AuthorityService;
-import cn.xiaozi5.graduation.pojo.AuthorityGroup;
 import cn.xiaozi5.graduation.pojo.User;
 
 /**
@@ -30,8 +27,7 @@ public class AuthorityCtl {
 	 */
 	@RequestMapping(value = "/getLeftNav", method = {RequestMethod.POST,RequestMethod.GET})
 	public Object getLeftNav( User user) {
-		List<AuthorityGroup> list=authorityService.getLeftNav(user);
-		return list;
+		return authorityService.getLeftNavByCache(user);
 	}
 	
 }
